@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>
+        {% block title %}
+            My Lego Friends
+        {% endblock %}
+    </title>
+    <link href="{% static "css/style.css" %}" rel="stylesheet">
+</head>
+<body>
+    <div id="header">
+        <a href="/" class="logo">My Lego Friends</a>
+    </div>
+    <div id="subheader">
+        <div class="cart">
+            {% with total_items=cart|length %}
+                {% if cart|length > 0 %}
+                    Твій кошик:
+                    <a href="{% url "cart:cart_detail" %}">{{ total_items }} товар(и), {{ cart.get_total_price }} &#8372;</a>
+                {% else %}
+                    Твій кошик порожній
+                {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+    <div id="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>
